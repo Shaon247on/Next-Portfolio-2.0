@@ -1,43 +1,51 @@
-"use client"
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
-import { useEffect } from 'react';
-import { PROJECTS } from './ProjectList';
+"use client";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  AnimatePresence,
+} from "framer-motion";
+import { useEffect } from "react";
+import { PROJECTS } from "./ProjectList";
+import Image from "next/image";
 
-const FloatingImage = ({ 
-  selectedProject, 
+const FloatingImage = ({
+  selectedProject,
   mousePosition,
-  containerRef 
+  containerRef,
 }: {
-  selectedProject: string | null
-  mousePosition: { x: number; y: number }
-  containerRef: React.RefObject<HTMLDivElement>
+  selectedProject: string | null;
+  mousePosition: { x: number; y: number };
+  containerRef: React.RefObject<HTMLDivElement>;
 }) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  
-  const springX = useSpring(x, { stiffness: 300, damping: 30 })
-  const springY = useSpring(y, { stiffness: 300, damping: 30 })
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-   useEffect(() => {
-    if (!containerRef.current) return
+  const springX = useSpring(x, { stiffness: 300, damping: 30 });
+  const springY = useSpring(y, { stiffness: 300, damping: 30 });
 
-    const rect = containerRef.current.getBoundingClientRect()
-    const containerWidth = rect.width
-    const containerHeight = rect.height
-    
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const containerWidth = rect.width;
+    const containerHeight = rect.height;
+
     // Base position: right side of the container
-    const baseX = containerWidth - 400 // Position from right edge
-    const baseY = containerHeight / 2 - 200 // Center vertically
-    
-    // Calculate mouse influence (much more subtle)
-    const mouseInfluenceX = (mousePosition.x - rect.left - containerWidth / 2) * 0.05 // 5% influence
-    const mouseInfluenceY = (mousePosition.y - rect.top - containerHeight / 2) * 0.05 // 5% influence
-    
-    x.set(baseX + mouseInfluenceX)
-    y.set(baseY + mouseInfluenceY)
-  }, [mousePosition, x, y])
+    const baseX = containerWidth - 400; // Position from right edge
+    const baseY = containerHeight / 2 - 200; // Center vertically
 
-  if (!selectedProject) return null
+    // Calculate mouse influence (much more subtle)
+    const mouseInfluenceX =
+      (mousePosition.x - rect.left - containerWidth / 2) * 0.05; // 5% influence
+    const mouseInfluenceY =
+      (mousePosition.y - rect.top - containerHeight / 2) * 0.05; // 5% influence
+
+    x.set(baseX + mouseInfluenceX);
+    y.set(baseY + mouseInfluenceY);
+  }, [mousePosition, x, y]);
+
+  if (!selectedProject) return null;
 
   return (
     <motion.div
@@ -52,35 +60,77 @@ const FloatingImage = ({
       transition={{ duration: 0.3 }}
     >
       <AnimatePresence mode="wait">
-        {PROJECTS.map((project) => (
-          selectedProject === project.slug && (
-            <motion.div
-              key={project.slug}
-              className="absolute inset-0"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Placeholder for project image */}
-              <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-blue-500/20 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-6xl mb-4 opacity-60">
-                    {project.slug.includes('ecommerce') ? '🚀' : 
-                     project.slug.includes('task') ? '📱' : 
-                     project.slug.includes('restaurant') ? '💼' : '🤖'}
+        {PROJECTS.map(
+          (project) =>
+            selectedProject === project.slug && (
+              <motion.div
+                key={project.slug}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {/* Placeholder for project image */}
+                <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-blue-500/20 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 opacity-60">
+                      {project.slug.includes("SAAS Application-1") ? (
+                        <Image
+                          src="/Restora.png"
+                          alt="Restora Dashboard page"
+                          width={350}
+                          height={400}
+                          className="object-cover"
+                          priority
+                        />
+                      ) : project.slug.includes("Competition Platform") ? (
+                        <Image
+                          src="/VictoryVault.png"
+                          alt="Victory Vault Dashboard"
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                      ) : project.slug.includes("Social Comunity Platform") ? (
+                        <Image
+                          src="/Reflect-Radar.png"
+                          alt="Reflect Radar page"
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                      ) : project.slug.includes("SAAS Application-2") ? (
+                        <Image
+                          src="/Aamar-Dokan.png"
+                          alt="Aminul - Frontend Developer"
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                      ) : (
+                        <Image
+                          src="/Portfolio.png"
+                          alt="Portfolio Dashboard"
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                      )}
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">
+                      {project.title}
+                    </h4>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">{project.title}</h4>
                 </div>
-              </div>
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            </motion.div>
-          )
-        ))}
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              </motion.div>
+            )
+        )}
       </AnimatePresence>
     </motion.div>
-  )
-}
+  );
+};
 
 export default FloatingImage;

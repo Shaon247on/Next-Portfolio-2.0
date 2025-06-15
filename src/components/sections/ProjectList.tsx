@@ -5,31 +5,64 @@ import { useRef, useState, useEffect } from 'react'
 import FloatingImage from './FloatingImage'
 import Project from './Project'
 
-// Mock data structure matching the original
-export const PROJECTS = [
+// TypeScript interface for project structure
+export interface ProjectType {
+  slug: string;
+  title: string;
+  thumbnail: string;
+  liveLink: string;
+  codeBase?: string;
+  techStack: string[];
+  credentials?: {
+    username?: string | undefined;
+    password?: string | undefined;
+  };
+}
+
+// Updated data structure with live links, codeBase, and credentials
+export const PROJECTS: ProjectType[] = [
   {
-    slug: 'SAAS Application',
+    slug: 'SAAS Application-1',
     title: 'RESTORA- POS',
     thumbnail: '/api/placeholder/400/500',
-    techStack: ['Next.js', 'TypeScript', 'Prisma','Tailwind CSS', 'MongoDB', 'Shadcn/ui', 'ZOD']
+    liveLink: 'https://restora.aamardokan.online/',
+    codeBase: 'https://github.com/Shaon247on/Restora-App',
+    techStack: ['Next.js', 'TypeScript', 'Prisma','Tailwind CSS', 'MongoDB', 'Shadcn/ui', 'ZOD'],
+    credentials: {
+      username: 'aminul247on@25',
+      password: 'Rango247on'
+    }
   },
   {
     slug: 'Competition Platform',
     title: 'Victory Vault', 
     thumbnail: '/api/placeholder/400/500',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'Tailwind CSS']
+    liveLink: 'https://assignment-12-supremacy.web.app/',
+    codeBase: 'hhttps://github.com/Shaon247on/Victory-Vault-A12',
+    techStack: ['React.js', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'Tailwind CSS'],
+    credentials: {
+      username: 'emarot@kaka.com',
+      password: 'Rango247on'
+    }
   },
   {
     slug: 'Social Comunity Platform',
-    title: 'Reflect Rader',
+    title: 'Reflect Radar',
     thumbnail: '/api/placeholder/400/500',
-    techStack: ['React', 'Prisma', 'MongoDB', 'Firebase', 'Tailwind CSS']
+    liveLink: 'https://assignment-11-battlefield.web.app/',
+    codeBase: 'https://github.com/Shaon247on/Reflect-Radar-A11',
+    techStack: ['React', 'Prisma', 'MongoDB', 'Firebase', 'Tailwind CSS'],
   },
   {
-    slug: 'SAAS Application',
+    slug: 'SAAS Application-2',
     title: 'AAmar Dokan- POS',
     thumbnail: '/api/placeholder/400/500',
-    techStack: ['React.js', 'TypeScript', 'Node.js', 'JWT', 'MongoDB', 'Express.js']
+    liveLink: 'https://pos.aamardokan.online/',
+    techStack: ['React.js', 'TypeScript', 'Node.js', 'JWT', 'MongoDB', 'Express.js'],
+    credentials: {
+      username: '01995962937',
+      password: 'Rango247on'
+    }
   }
 ]
 

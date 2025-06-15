@@ -1,7 +1,11 @@
-
 import { motion } from 'framer-motion'
 
-const AnimatedExternalLink = ({ isHovered }: { isHovered: boolean }) => {
+// TypeScript interface for component props
+interface AnimatedExternalLinkProps {
+  isHovered: boolean;
+}
+
+const AnimatedExternalLink: React.FC<AnimatedExternalLinkProps> = ({ isHovered }) => {
   const pathVariants = {
     hidden: {
       pathLength: 0,
@@ -63,4 +67,4 @@ const AnimatedExternalLink = ({ isHovered }: { isHovered: boolean }) => {
   )
 }
 
-export default AnimatedExternalLink;
+export default AnimatedExternalLink

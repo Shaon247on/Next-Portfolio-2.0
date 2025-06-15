@@ -38,24 +38,24 @@ export default function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 lg:px-10 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${
         scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+      <div className="w-full max-w-7xl mx-auto sm:px-2 md:px-4 lg:px-8 xl:px-12 2xl:px-16">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-2xl font-bold gradient-text font-heading"
+            className="text-xl sm:text-2xl font-bold gradient-text font-heading flex-shrink-0"
           >
             <ShaonLogo size="sm" />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -63,10 +63,10 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-300 hover:text-white transition-colors duration-200 font-medium relative group"
+                className="text-sm lg:text-base text-gray-300 hover:text-white transition-colors duration-200 font-medium relative group px-2 py-1"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-[calc(100%-16px)]"></span>
               </motion.button>
             ))}
           </div>
@@ -77,9 +77,9 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-blue-400 transition-colors duration-200"
+            className="md:hidden text-white hover:text-blue-400 transition-colors duration-200 p-2 flex-shrink-0"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
         </div>
       </div>
@@ -93,19 +93,21 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden glass backdrop-blur-md border-t border-white/10"
           >
-            <div className="container-custom py-4">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left py-3 text-gray-300 hover:text-white transition-colors duration-200 font-medium"
-                >
-                  {item.name}
-                </motion.button>
-              ))}
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4">
+              <div className="flex flex-col space-y-1">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * index }}
+                    onClick={() => scrollToSection(item.href)}
+                    className="text-left py-3 px-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 font-medium"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

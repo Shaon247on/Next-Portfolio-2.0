@@ -143,8 +143,8 @@ export default function Hero() {
 
             <motion.div variants={itemVariants} className="flex gap-6 pt-4">
               {[
-                { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
+                { icon: Github, href: "https://github.com/Shaon247on/", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/md-aminul-islam-shaon07/", label: "LinkedIn" },
                 {
                   icon: Mail,
                   href: "mailto:aminul007.ais@gmail.com",
@@ -156,6 +156,7 @@ export default function Hero() {
                   href={href}
                   className="text-gray-400 hover:text-white transition-colors duration-300 group"
                   aria-label={label}
+                  target="_blank"
                 >
                   <Icon className="w-6 h-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
                 </a>
