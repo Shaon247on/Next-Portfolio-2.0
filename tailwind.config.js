@@ -55,7 +55,7 @@ module.exports = {
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite alternate',
         'slide-up': 'slideUp 0.5s ease-out',
-        'fade-in': 'fadeIn 0.5s ease-out',
+         fadeIn: "fadeIn 0.5s ease-out forwards",
       },
       keyframes: {
         float: {
@@ -71,8 +71,8 @@ module.exports = {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
       },
       fontFamily: {
