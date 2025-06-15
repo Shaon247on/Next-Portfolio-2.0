@@ -27,7 +27,7 @@ export default function GlobalLoader() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex bg-gray-600"
+          className="fixed inset-0 z-[9999] flex bg-transparent items-center justify-center overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
         >
@@ -35,7 +35,7 @@ export default function GlobalLoader() {
           {Array.from({ length: 7 }).map((_, i) => (
             <motion.div
               key={i}
-              className="preloader-item h-full w-[14.2857%] bg-black"
+              className="preloader-item h-full w-[14.2857%] bg-[#9E59F7]"
               initial={{ y: 0 }}
               animate={{ y: '100%' }}
               transition={{

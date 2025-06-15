@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import ShaonLogo from './Logo'
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -50,7 +51,7 @@ export default function Navbar() {
             transition={{ delay: 0.2 }}
             className="text-2xl font-bold gradient-text font-heading"
           >
-            Aminul
+            <ShaonLogo size="sm" />
           </motion.div>
 
           {/* Desktop Navigation */}

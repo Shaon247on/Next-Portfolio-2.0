@@ -6,7 +6,7 @@ import Experience from "@/components/sections/Experience"
 import Footer from "@/components/sections/Footer"
 import Hero from "@/components/sections/Hero"
 import MyStack from "@/components/sections/MyStack"
-import Projects from "@/components/sections/Projects"
+import Projects from "@/components/sections/ProjectList"
 import FloatingParticles from "@/components/ui/FloatingParticles"
 
 

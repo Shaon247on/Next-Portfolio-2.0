@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${antonFont.variable} ${robotoFlex.variable} antialiased bg-gray-600`}
+        className={`${antonFont.variable} ${robotoFlex.variable} antialiased bg-[#212121]`}
       >
         <AdvancedCustomCursor />
         <GlobalLoader />

@@ -17,31 +17,35 @@ import {
   SiPostgresql,
   SiPrisma,
   SiAntdesign,
-  SiMaterialdesign
+  SiMaterialdesign,
+  SiReacthookform,
 } from 'react-icons/si'
+import { FaServicestack } from "react-icons/fa6";
 
 const techStacks = {
   frontend: [
     { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
     { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
     { name: 'React.js', icon: SiReact, color: '#61DAFB' },
-    { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
+    { name: 'Next.js', icon: SiNextdotjs, color: '#ffffff' },
     { name: 'TailwindCSS', icon: SiTailwindcss, color: '#06B6D4' },
     { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
     { name: 'Redux Toolkit', icon: SiRedux, color: '#764ABC' },
   ],
   backend: [
     { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
-    { name: 'Express.js', icon: SiExpress, color: '#000000' },
+    { name: 'Express.js', icon: SiExpress, color: '#ffffff' },
   ],
   database: [
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
     { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
-    { name: 'Prisma ORM', icon: SiPrisma, color: '#2D3748' },
+    { name: 'Prisma ORM', icon: SiPrisma, color: '#ffffff' },
   ],
   tools: [
     { name: 'Material UI', icon: SiMaterialdesign, color: '#007FFF' },
     { name: 'Ant Design', icon: SiAntdesign, color: '#1890FF' },
+    { name: 'React Hook Form', icon: SiReacthookform , color: '#ffffff' },
+    { name: 'React Hook Form', icon: FaServicestack  , color: '#ffffff' },
   ]
 }
 
@@ -110,10 +114,10 @@ export default function MyStack() {
   const StackSection = ({ title, techs, delay = 0 }: { title: string, techs: any[], delay?: number }) => (
     <motion.div
       variants={itemVariants}
-      className="space-y-8"
+      className="space-y-8 hover:text-blue-400 transition-colors duration-300"
     >
-      <h3 className="text-2xl md:text-3xl font-bold text-center">
-        <span className="gradient-text">{title}</span>
+      <h3 className="text-2xl md:text-3xl font-bold text-center hover:text-blue-400 transition-colors duration-300">
+        <span className="gradient-text text-white">{title}</span>
       </h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {techs.map((tech, index) => (
@@ -132,8 +136,8 @@ export default function MyStack() {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6">
-              My <span className="gradient-text">Stack</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 text-white">
+              MY <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Stack</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">

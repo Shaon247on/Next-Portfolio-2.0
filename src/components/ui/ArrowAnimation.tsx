@@ -30,7 +30,7 @@ const ArrowAnimation = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-600 flex items-center justify-center overflow-hidden w-full absolute z-10 -left-44">
+    <div className="min-h-screen bg-transparent hidden lg:flex items-center justify-center overflow-hidden w-full absolute z-10 -left-44">
       {/* Background content */}
 
       {/* Arrow Animation */}

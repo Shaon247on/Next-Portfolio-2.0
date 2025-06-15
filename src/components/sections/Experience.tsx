@@ -52,8 +52,8 @@ export default function Experience() {
           animate={isInView ? "visible" : "hidden"}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6">
-              My <span className="gradient-text">Experience</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 text-white">
+              MY <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Experience</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -88,7 +88,7 @@ export default function Experience() {
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
-                        <span>Remote</span>
+                        <span>On-Site</span>
                       </div>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ export default function Experience() {
                       <div className="mt-6 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20">
                         <div className="flex items-center gap-3 mb-3">
                           <Shield className="w-5 h-5 text-green-400" />
-                          <h6 className="font-semibold text-white">Current Project: Restaurant POS SAAS</h6>
+                          <h6 className="font-semibold text-white">Current Project: Restora (Restaurant POS SAAS)</h6>
                         </div>
                         <p className="text-gray-300 mb-4">
                           Leading the development of a comprehensive Restaurant POS SAAS platform, building scalable architecture and implementing modern authentication systems.
