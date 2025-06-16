@@ -111,10 +111,11 @@ export default function MyStack() {
     </motion.div>
   )
 
-  const StackSection = ({ title, techs, delay = 0 }: { title: string, techs: any[], delay?: number }) => (
+  const StackSection = ({ title, techs, delay = 0, key }: { title: string, techs: any[], delay?: number, key:number; }) => (
     <motion.div
       variants={itemVariants}
       className="space-y-8 hover:text-blue-400 transition-colors duration-300"
+      key={key}
     >
       <h3 className="text-2xl md:text-3xl font-bold text-center hover:text-blue-400 transition-colors duration-300">
         <span className="gradient-text text-white">{title}</span>
@@ -146,10 +147,10 @@ export default function MyStack() {
           </motion.div>
 
           <div className="space-y-20">
-            <StackSection title="Frontend" techs={techStacks.frontend} delay={0} />
-            <StackSection title="Backend" techs={techStacks.backend} delay={7} />
-            <StackSection title="Database" techs={techStacks.database} delay={9} />
-            <StackSection title="Tools & Libraries" techs={techStacks.tools} delay={12} />
+            <StackSection key={1} title="Frontend" techs={techStacks.frontend} delay={0} />
+            <StackSection key={2} title="Backend" techs={techStacks.backend} delay={7} />
+            <StackSection key={3} title="Database" techs={techStacks.database} delay={9} />
+            <StackSection key={4} title="Tools & Libraries" techs={techStacks.tools} delay={12} />
           </div>
         </motion.div>
       </div>

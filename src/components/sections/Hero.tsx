@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Download, Mail, Github, Linkedin, ArrowRight, Sparkles } from "lucide-react";
+import {
+  Download,
+  Mail,
+  Github,
+  Linkedin,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 import Image from "next/image";
 import ArrowAnimation from "../ui/ArrowAnimation";
 
@@ -40,6 +47,10 @@ export default function Hero() {
     },
   };
 
+  const handleClick = () => {
+    console.log("hello click");
+    window.location.href = 'mailto:aminul007.ais@gmail.com';
+  };
   return (
     <section
       id="home"
@@ -89,6 +100,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <button
+                onClick={handleClick}
                 className="group relative overflow-hidden bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl transform"
                 style={{
                   backgroundSize: "200% 100%",
@@ -105,12 +117,11 @@ export default function Hero() {
                 ></div>
 
                 {/* Button content */}
-                <div className="relative flex items-center gap-3 z-10">
+                <div className="group flex items-center gap-3 cursor-pointer">
                   <Mail className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
                   <span>Hire Me</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
-
                 {/* Floating particles */}
                 <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-ping"></div>
                 <div className="absolute bottom-2 left-2 w-1.5 h-1.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 group-hover:animate-pulse"></div>
@@ -129,11 +140,14 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-500"></div>
 
                 {/* Button content */}
-                <div className="relative flex items-center gap-3 z-10">
+                <a
+                  href="https://drive.google.com/uc?export=download&id=18kDjzxmg5mekSvfwWQEoXcJ8Drva_Abl"
+                  className="relative flex items-center gap-3 z-10"
+                >
                   <Download className="w-5 h-5 group-hover:translate-y-1 group-hover:scale-110 transition-all duration-300" />
                   <span>Download CV</span>
                   <Sparkles className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:rotate-180 transition-all duration-500" />
-                </div>
+                </a>
 
                 {/* Corner decorations */}
                 <div className="absolute top-1 left-1 w-3 h-3 border-l-2 border-t-2 border-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -143,8 +157,16 @@ export default function Hero() {
 
             <motion.div variants={itemVariants} className="flex gap-6 pt-4">
               {[
-                { icon: Github, href: "https://github.com/Shaon247on/", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/md-aminul-islam-shaon07/", label: "LinkedIn" },
+                {
+                  icon: Github,
+                  href: "https://github.com/Shaon247on/",
+                  label: "GitHub",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/md-aminul-islam-shaon07/",
+                  label: "LinkedIn",
+                },
                 {
                   icon: Mail,
                   href: "mailto:aminul007.ais@gmail.com",

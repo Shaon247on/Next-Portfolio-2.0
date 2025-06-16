@@ -63,7 +63,6 @@ const Project: React.FC<ProjectProps> = ({
       className="project-item group leading-none py-5 border-b first:!pt-0 last:pb-0 last:border-none border-gray-800 transition-all duration-300 cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleProjectClick}
       whileHover={{ x: 10 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
@@ -75,38 +74,46 @@ const Project: React.FC<ProjectProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
         >
-          <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center">
-            <span className="text-4xl opacity-60">
+          <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-start justify-center p-2 sm:p-4 md:p-6">
+            <span className="block w-full h-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
               {index === 0 ? (
                 <Image
                   src="/Restora.png"
                   alt="Restora Dashboard page"
-                  fill
-                  className="object-cover"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-auto object-cover object-top"
                   priority
                 />
               ) : index === 1 ? (
                 <Image
                   src="/VictoryVault.png"
-                  alt="Victory Vault page"
-                  fill
-                  className="object-cover"
+                  alt="Victory Vault Dashboard"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-auto object-cover object-top"
                   priority
                 />
               ) : index === 2 ? (
                 <Image
                   src="/Reflect-Radar.png"
                   alt="Reflect Radar page"
-                  fill
-                  className="object-cover"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-auto object-cover object-top"
                   priority
                 />
               ) : (
                 <Image
-                  src="/photo.jpg"
+                  src="/Aamar-Dokan.png"
                   alt="Aminul - Frontend Developer"
-                  fill
-                  className="object-cover"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-auto object-cover object-top"
                   priority
                 />
               )}
@@ -129,10 +136,11 @@ const Project: React.FC<ProjectProps> = ({
         <div className="flex-1">
           {/* Project Title with Gradient Effect */}
           <motion.h4
-            className="text-4xl md:text-6xl flex gap-4 font-bold transition-all duration-700 bg-gradient-to-r from-blue-500 to-white from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left"
+            className="text-3xl md:text-6xl flex gap-4 font-bold transition-all duration-700 bg-gradient-to-r from-blue-500 to-white from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 0.3 }}
+            onClick={handleProjectClick}
           >
             {project.title}
             <span className="text-white">
@@ -202,7 +210,7 @@ const Project: React.FC<ProjectProps> = ({
           {/* Credentials Panel */}
           {showCredentials && (
             <motion.div
-              className="mt-3 p-3 bg-gray-900/50 border border-gray-700 rounded-lg w-1/2"
+              className="mt-3 p-3 bg-gray-900/50 border border-gray-700 rounded-lg lg:w-1/2"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -221,7 +229,9 @@ const Project: React.FC<ProjectProps> = ({
                     {project?.credentials && (
                       <button
                         onClick={() =>
-                          copyToClipboard(project?.credentials?.username as string)
+                          copyToClipboard(
+                            project?.credentials?.username as string
+                          )
                         }
                         className="text-gray-400 hover:text-white transition-colors"
                         title="Copy username"
@@ -253,7 +263,9 @@ const Project: React.FC<ProjectProps> = ({
                     )}
                     <button
                       onClick={() =>
-                        copyToClipboard(project?.credentials?.password as string)
+                        copyToClipboard(
+                          project?.credentials?.password as string
+                        )
                       }
                       className="text-gray-400 hover:text-white transition-colors"
                       title="Copy password"

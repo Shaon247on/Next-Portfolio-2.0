@@ -89,6 +89,7 @@ const FloatingImage = ({
                           src="/VictoryVault.png"
                           alt="Victory Vault Dashboard"
                           fill
+                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
                           className="object-cover"
                           priority
                         />
@@ -97,6 +98,7 @@ const FloatingImage = ({
                           src="/Reflect-Radar.png"
                           alt="Reflect Radar page"
                           fill
+                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
                           className="object-cover"
                           priority
                         />
@@ -105,6 +107,7 @@ const FloatingImage = ({
                           src="/Aamar-Dokan.png"
                           alt="Aminul - Frontend Developer"
                           fill
+                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
                           className="object-cover"
                           priority
                         />
@@ -113,6 +116,7 @@ const FloatingImage = ({
                           src="/Portfolio.png"
                           alt="Portfolio Dashboard"
                           fill
+                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
                           className="object-cover"
                           priority
                         />

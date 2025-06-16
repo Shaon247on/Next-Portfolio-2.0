@@ -35,10 +35,8 @@ export default function Navbar() {
   }
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 px-2 lg:px-0 w-full ${
         scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
       }`}
     >
@@ -72,15 +70,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-white hover:text-blue-400 transition-colors duration-200 p-2 flex-shrink-0"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </motion.button>
+          </button>
         </div>
       </div>
 
@@ -112,6 +107,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   )
 }

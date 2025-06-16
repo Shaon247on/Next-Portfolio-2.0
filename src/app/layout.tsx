@@ -19,21 +19,28 @@ const robotoFlex = Roboto_Flex({
   variable: "--font-roboto-flex",
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
+export const themeColor = '#0f172a';
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://next-portfolio-2-0.vercel.app/'),
   title: "Aminul - Frontend Developer",
   description:
     "Creative Frontend Developer with 1 year of experience in building high-performance, scalable, and responsive web solutions",
   keywords:
     "Frontend Developer, React, Next.js, TypeScript, TailwindCSS, Full Stack Developer",
   authors: [{ name: "Aminul" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0f172a",
   openGraph: {
     title: "Aminul - Frontend Developer",
     description:
       "Creative Frontend Developer with 1 year of experience in building high-performance, scalable, and responsive web solutions",
     type: "website",
     locale: "en_US",
+    images: ['https://next-portfolio-2-0.vercel.app/og-image.png']
   },
   twitter: {
     card: "summary_large_image",
@@ -53,7 +60,9 @@ export default function RootLayout({
       <body
         className={`${antonFont.variable} ${robotoFlex.variable} antialiased bg-[#212121]`}
       >
-        <AdvancedCustomCursor />
+        <div className="hidden lg:block">
+          <AdvancedCustomCursor />
+        </div>
         <GlobalLoader />
         {children}
       </body>
