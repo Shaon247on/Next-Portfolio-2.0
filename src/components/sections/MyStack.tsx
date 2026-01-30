@@ -19,8 +19,10 @@ import {
   SiAntdesign,
   SiMaterialdesign,
   SiReacthookform,
+  SiAxios,
+  SiSupabase,
 } from 'react-icons/si'
-import { FaServicestack } from "react-icons/fa6";
+import { FaUserShield, FaPalette, FaKey, FaLock, FaCheckCircle, FaProjectDiagram } from 'react-icons/fa'
 
 const techStacks = {
   frontend: [
@@ -39,15 +41,16 @@ const techStacks = {
   database: [
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
     { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
-    { name: 'Prisma ORM', icon: SiPrisma, color: '#ffffff' },
   ],
   tools: [
     { name: 'Material UI', icon: SiMaterialdesign, color: '#007FFF' },
     { name: 'Ant Design', icon: SiAntdesign, color: '#1890FF' },
     { name: 'React Hook Form', icon: SiReacthookform , color: '#ffffff' },
-    { name: 'React Hook Form', icon: FaServicestack  , color: '#ffffff' },
+    { name: 'shadcn/ui', icon: FaPalette, color: '#FF0080' },
+    { name: 'Clerk', icon: FaUserShield, color: '#4B5563' },
   ]
 }
+
 
 export default function MyStack() {
   const ref = useRef(null)
@@ -93,21 +96,28 @@ export default function MyStack() {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       transition={{ delay: index * 0.1 }}
-      className="tech-card group"
-      // whileHover={{ scale: 1.05 }}
+      className="tech-card group relative"
+      whileHover={{ scale: 1.02 }}
     >
       <div className="flex flex-col items-center space-y-4">
-        <div 
-          className="text-5xl transition-all duration-300 group-hover:scale-110"
+        <motion.div
+          className="text-5xl transition-all duration-300"
           style={{ color: tech.color }}
+          initial={{ scale: 1, rotate: 0, y: 0 }}
+          whileHover={{ scale: 1.28, rotate: 8, y: -8 }}
+          transition={{ type: 'spring', stiffness: 320, damping: 20 }}
         >
           <tech.icon />
-        </div>
-        <h3 className="text-white font-semibold text-center group-hover:text-blue-400 transition-colors duration-300">
+        </motion.div>
+        <motion.h3 className="text-white font-semibold text-center transition-colors duration-300"
+          initial={{ color: '#FFFFFF' }}
+          whileHover={{ color: '#60A5FA' }}
+          transition={{ duration: 0.2 }}
+        >
           {tech.name}
-        </h3>
+        </motion.h3>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      {/* Overlay removed per request (no background color on hover) */}
     </motion.div>
   )
 
@@ -147,10 +157,22 @@ export default function MyStack() {
           </motion.div>
 
           <div className="space-y-20">
-            <StackSection key={1} title="Frontend" techs={techStacks.frontend} delay={0} />
-            <StackSection key={2} title="Backend" techs={techStacks.backend} delay={7} />
-            <StackSection key={3} title="Database" techs={techStacks.database} delay={9} />
-            <StackSection key={4} title="Tools & Libraries" techs={techStacks.tools} delay={12} />
+            <StackSection key={1} title="Frontend" techs={[
+              ...techStacks.frontend,
+              { name: 'Axios', icon: SiAxios, color: '#0082C8' },
+              { name: 'RTK Query', icon: SiRedux, color: '#764ABC' },
+              { name: 'TanStack Query', icon: FaProjectDiagram, color: '#FF6A00' },
+            ]} delay={0} />
+            <StackSection key={2} title="Backend" techs={[
+              ...techStacks.backend,
+              { name: 'Prisma ORM', icon: SiPrisma, color: '#ffffff' },
+              { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
+              { name: 'JWT', icon: FaKey, color: '#F59E0B' },
+              { name: 'jose', icon: FaLock, color: '#10B981' },
+              { name: 'Zod Validation', icon: FaCheckCircle, color: '#06B6D4' },
+            ]} delay={7} />
+            <StackSection key={3} title="Database" techs={techStacks.database} delay={14} />
+            <StackSection key={4} title="Tools & Libraries" techs={techStacks.tools} delay={16} />
           </div>
         </motion.div>
       </div>

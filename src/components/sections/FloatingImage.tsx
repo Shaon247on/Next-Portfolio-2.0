@@ -32,8 +32,8 @@ const FloatingImage = ({
     const containerHeight = rect.height;
 
     // Base position: right side of the container
-    const baseX = containerWidth - 400; // Position from right edge
-    const baseY = containerHeight / 2 - 200; // Center vertically
+    const baseX = containerWidth - 500; // Position from right edge (increased for larger image)
+    const baseY = containerHeight / 2 - 250; // Center vertically (increased for larger image)
 
     // Calculate mouse influence (much more subtle)
     const mouseInfluenceX =
@@ -47,9 +47,24 @@ const FloatingImage = ({
 
   if (!selectedProject) return null;
 
+  // Get project image based on slug
+  const getProjectImage = (slug: string) => {
+    const imageMap: { [key: string]: string } = {
+      "sports-coaching-platform": "/ballmastery.png",
+      "job-training-platform": "/api/placeholder/600/400",
+      "geography-quiz-platform": "/geography.png",
+      "business-platform": "/oxdoug.png",
+      "math-platform": "/mathos.png",
+      "Competition Platform": "/VictoryVault.png",
+      "Social Community Platform": "/Reflect-Radar.png",
+    };
+
+    return imageMap[slug] || "/api/placeholder/600/400";
+  };
+
   return (
     <motion.div
-      className="absolute top-0 left-0 z-10 pointer-events-none w-[300px] xl:w-[350px] aspect-[3/4] overflow-hidden rounded-lg shadow-2xl"
+      className="absolute top-0 left-0 z-10 pointer-events-none max-w-[500px] max-h-[700px] overflow-hidden rounded-lg shadow-2xl"
       style={{
         x: springX,
         y: springY,
@@ -65,70 +80,25 @@ const FloatingImage = ({
             selectedProject === project.slug && (
               <motion.div
                 key={project.slug}
-                className="absolute inset-0"
+                className="relative"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                {/* Placeholder for project image */}
-                <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-blue-500/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4 opacity-60">
-                      {project.slug.includes("SAAS Application-1") ? (
-                        <Image
-                          src="/Restora.png"
-                          alt="Restora Dashboard page"
-                          width={350}
-                          height={400}
-                          className="object-cover"
-                          priority
-                        />
-                      ) : project.slug.includes("Competition Platform") ? (
-                        <Image
-                          src="/VictoryVault.png"
-                          alt="Victory Vault Dashboard"
-                          fill
-                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-                          className="object-cover"
-                          priority
-                        />
-                      ) : project.slug.includes("Social Comunity Platform") ? (
-                        <Image
-                          src="/Reflect-Radar.png"
-                          alt="Reflect Radar page"
-                          fill
-                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-                          className="object-cover"
-                          priority
-                        />
-                      ) : project.slug.includes("SAAS Application-2") ? (
-                        <Image
-                          src="/Aamar-Dokan.png"
-                          alt="Aminul - Frontend Developer"
-                          fill
-                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-                          className="object-cover"
-                          priority
-                        />
-                      ) : (
-                        <Image
-                          src="/Portfolio.png"
-                          alt="Portfolio Dashboard"
-                          fill
-                          sizes="(max-width: 768px) 100vw, (min-width: 769px) 50vw"
-                          className="object-cover"
-                          priority
-                        />
-                      )}
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">
-                      {project.title}
-                    </h4>
-                  </div>
+                {/* Project image */}
+                <div className="relative w-auto h-auto bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-blue-500/20 rounded-lg overflow-hidden">
+                  <Image
+                    src={getProjectImage(project.slug)}
+                    alt={`${project.title} Preview`}
+                    width={500}
+                    height={700}
+                    className="w-auto h-auto min-w-[350px] max-w-[500px] max-h-[700px] object-contain"
+                    priority
+                  />
                 </div>
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
               </motion.div>
             )
         )}
