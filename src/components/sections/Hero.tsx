@@ -58,7 +58,7 @@ export default function Hero() {
     >
       <ArrowAnimation />
       {/* Hero Section */}
-      <div className="container-custom z-20 relative">
+      <div className="max-w-[1440px] mx-auto z-20 relative">
         <motion.div
           variants={containerVariants}
           initial="hidden"
