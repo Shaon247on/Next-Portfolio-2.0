@@ -145,7 +145,7 @@ const Footer = () => {
             className="flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-400"
           >
             <div className="flex items-center gap-2">
-              <span>© 2024 Aminul Islam. Made with</span>
+              <span>© {new Date().getFullYear()} Md Aminul Islam Shaon. Made with</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
@@ -154,21 +154,21 @@ const Footer = () => {
               </motion.div>
               <span>and Next.js</span>
             </div>
-            
+
             <div className="flex items-center gap-6">
               <motion.span
                 className="text-sm"
                 whileHover={{ color: '#a855f7' }}
                 transition={{ duration: 0.3 }}
               >
-                Frontend Developer
+                Full-Stack Developer
               </motion.span>
               <motion.span
                 className="text-sm"
                 whileHover={{ color: '#3b82f6' }}
                 transition={{ duration: 0.3 }}
               >
-                Full Stack Developer
+                Next.js &amp; React · Bangladesh
               </motion.span>
             </div>
           </motion.div>

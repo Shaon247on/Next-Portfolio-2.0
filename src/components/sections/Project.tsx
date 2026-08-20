@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ProjectType } from "./ProjectList";
+import { ProjectType } from "@/data/projects";
 import AnimatedExternalLink from "../ui/AnimatedExternalLink";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
@@ -17,6 +17,50 @@ interface ProjectProps {
   onProjectClick: (slug: string) => void;
   isMobile: boolean;
 }
+
+// Copy-to-clipboard row used for the demo login credentials
+const CredentialField: React.FC<{ label: string; value: string }> = ({
+  label,
+  value,
+}) => {
+  const copyToClipboard = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-sm text-gray-400 font-medium">{label}:</span>
+      <div className="flex items-center gap-2">
+        <code className="text-sm bg-gray-800 px-3 py-1.5 rounded text-green-400 font-mono break-all flex-1 overflow-hidden">
+          {value}
+        </code>
+        <button
+          onClick={copyToClipboard}
+          className="text-gray-400 hover:text-white transition-colors p-1 flex-shrink-0"
+          title={`Copy ${label.toLowerCase()}`}
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Project: React.FC<ProjectProps> = ({
   project,
@@ -46,39 +90,9 @@ const Project: React.FC<ProjectProps> = ({
     onProjectClick(project.slug);
   };
 
-  const handleLiveDemoClick = (e: React.MouseEvent): void => {
+  const handleLinkClick = (e: React.MouseEvent, url: string): void => {
     e.stopPropagation();
-    window.open(project.liveLink, "_blank", "noopener,noreferrer");
-  };
-
-  const handleGithubClick = (e: React.MouseEvent): void => {
-    e.stopPropagation();
-    if (project.codeBase) {
-      window.open(project.codeBase, "_blank", "noopener,noreferrer");
-    }
-  };
-
-  const copyToClipboard = async (text: string): Promise<void> => {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (err) {
-      console.error("Failed to copy text: ", err);
-    }
-  };
-
-  // Get project image based on index
-  const getProjectImage = () => {
-    const imageMap: { [key: number]: string } = {
-      0:"/ballmastery.png",
-      1:"",
-      2:"/geography.png",
-      3:"/oxdoug.png",
-      4:"/mathos.png",
-      5: "/VictoryVault.png",
-      6: "/Reflect-Radar.png",
-    };
-
-    return imageMap[index] || "/api/placeholder/600/400";
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -102,8 +116,8 @@ const Project: React.FC<ProjectProps> = ({
             <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-start justify-center p-2 sm:p-4 md:p-6">
               <span className="block w-full h-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%]">
                 <Image
-                  src={getProjectImage()}
-                  alt={`${project.title} Preview`}
+                  src={project.thumbnail}
+                  alt={`${project.title} — ${project.techStack[0]} project preview`}
                   width={0}
                   height={0}
                   sizes="100vw"
@@ -134,9 +148,9 @@ const Project: React.FC<ProjectProps> = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 + 0.3 }}
             >
-              <h4 className="text-3xl md:text-6xl font-bold transition-all duration-700 bg-gradient-to-r from-blue-500 to-white from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
+              <h3 className="text-3xl md:text-6xl font-bold transition-all duration-700 bg-gradient-to-r from-blue-500 to-white from-[50%] to-[50%] bg-[length:200%] bg-right bg-clip-text text-transparent group-hover:bg-left">
                 {project.title}
-              </h4>
+              </h3>
               <motion.div
                 animate={{ rotate: isExpanded ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -170,43 +184,72 @@ const Project: React.FC<ProjectProps> = ({
               animate={{ opacity: 1 }}
               transition={{ delay: index * 0.1 + 0.5 }}
             >
-              {/* Live Demo Button */}
-              <button
-                onClick={handleLiveDemoClick}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-md transition-all duration-200 font-medium"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-                Live Demo
-              </button>
-
-              {/* GitHub Link Button */}
-              {project.codeBase && (
+              {/* Live Deployment Buttons */}
+              {project.liveLinks.map((link) => (
                 <button
-                  onClick={handleGithubClick}
+                  key={link.url}
+                  onClick={(e) => handleLinkClick(e, link.url)}
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-md transition-all duration-200 font-medium"
+                >
+                  <svg
+                    className="w-4 h-4 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                  {project.liveLinks.length > 1
+                    ? `Live — ${link.label}`
+                    : link.label}
+                </button>
+              ))}
+
+              {/* GitHub Repository Buttons */}
+              {project.codeBases?.map((repo) => (
+                <button
+                  key={repo.url}
+                  onClick={(e) => handleLinkClick(e, repo.url)}
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-md transition-all duration-200 font-medium"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 h-4 flex-shrink-0"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                   </svg>
-                  Source Code
+                  {repo.label}
                 </button>
-              )}
+              ))}
+
+              {/* App Store Download Buttons — promoted to primary when there is
+                  no live web deployment to link to */}
+              {project.appLinks?.map((app) => (
+                <button
+                  key={app.url}
+                  onClick={(e) => handleLinkClick(e, app.url)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 text-sm rounded-md transition-all duration-200 font-medium ${
+                    project.liveLinks.length > 0
+                      ? "bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white"
+                      : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white"
+                  }`}
+                >
+                  <svg
+                    className="w-4 h-4 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.093 12l2.605-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
+                  </svg>
+                  {app.label}
+                </button>
+              ))}
             </motion.div>
           </div>
         </div>
@@ -227,8 +270,10 @@ const Project: React.FC<ProjectProps> = ({
                 {/* Project Image */}
                 <div className="w-full overflow-hidden rounded-lg bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 flex items-center justify-center">
                   <Image
-                    src={getProjectImage()}
-                    alt={`${project.title} Screenshot`}
+                    src={project.thumbnail}
+                    alt={`${project.title} dashboard screenshot — built with ${project.techStack
+                      .slice(0, 3)
+                      .join(", ")}`}
                     width={800}
                     height={600}
                     className="w-full h-auto object-contain"
@@ -238,9 +283,9 @@ const Project: React.FC<ProjectProps> = ({
                 {/* Project Description */}
                 {project.description && (
                   <div className="overflow-hidden">
-                    <h5 className="text-lg font-semibold text-white mb-3">
+                    <h4 className="text-lg font-semibold text-white mb-3">
                       About the Project
-                    </h5>
+                    </h4>
                     <p className="text-gray-300 leading-relaxed break-words">
                       {project.description}
                     </p>
@@ -250,9 +295,9 @@ const Project: React.FC<ProjectProps> = ({
                 {/* Key Features */}
                 {project.features && project.features.length > 0 && (
                   <div className="overflow-hidden">
-                    <h5 className="text-lg font-semibold text-white mb-3">
+                    <h4 className="text-lg font-semibold text-white mb-3">
                       Key Features
-                    </h5>
+                    </h4>
                     <ul className="space-y-2">
                       {project.features.map((feature, idx) => (
                         <li
@@ -269,9 +314,9 @@ const Project: React.FC<ProjectProps> = ({
 
                 {/* Complete Tech Stack */}
                 <div className="overflow-hidden">
-                  <h5 className="text-lg font-semibold text-white mb-3">
+                  <h4 className="text-lg font-semibold text-white mb-3">
                     Technologies Used
-                  </h5>
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
                       <span
@@ -285,9 +330,9 @@ const Project: React.FC<ProjectProps> = ({
                 </div>
 
                 {/* Admin Credentials */}
-                {project.credentials && (
+                {project.credentials && project.credentials.length > 0 && (
                   <div className="p-4 md:p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl border border-blue-500/20 overflow-hidden">
-                    <h5 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                       <svg
                         className="w-5 h-5 flex-shrink-0"
                         fill="none"
@@ -301,75 +346,37 @@ const Project: React.FC<ProjectProps> = ({
                           d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
                         />
                       </svg>
-                      <span className="break-words">Admin Login Credentials</span>
-                    </h5>
-                    <div className="space-y-3">
-                      <div className="flex flex-col gap-2">
-                        <span className="text-sm text-gray-400 font-medium">
-                          Email:
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <code className="text-sm bg-gray-800 px-3 py-1.5 rounded text-green-400 font-mono break-all flex-1 overflow-hidden">
-                            {project.credentials.email}
-                          </code>
-                          <button
-                            onClick={() =>
-                              copyToClipboard(
-                                project.credentials?.email as string
-                              )
-                            }
-                            className="text-gray-400 hover:text-white transition-colors p-1 flex-shrink-0"
-                            title="Copy email"
-                          >
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          </button>
+                      <span className="break-words">
+                        {project.credentials.length > 1
+                          ? "Demo Login Credentials"
+                          : "Admin Login Credentials"}
+                      </span>
+                    </h4>
+                    <div className="space-y-6">
+                      {project.credentials.map((credential, idx) => (
+                        <div
+                          key={credential.email ?? idx}
+                          className="space-y-3"
+                        >
+                          {credential.label && (
+                            <span className="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-300 bg-blue-500/10 border border-blue-500/20 rounded-full break-words">
+                              {credential.label}
+                            </span>
+                          )}
+                          {credential.email && (
+                            <CredentialField
+                              label="Email"
+                              value={credential.email}
+                            />
+                          )}
+                          {credential.password && (
+                            <CredentialField
+                              label="Password"
+                              value={credential.password}
+                            />
+                          )}
                         </div>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <span className="text-sm text-gray-400 font-medium">
-                          Password:
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <code className="text-sm bg-gray-800 px-3 py-1.5 rounded text-green-400 font-mono break-all flex-1 overflow-hidden">
-                            {project.credentials.password}
-                          </code>
-                          <button
-                            onClick={() =>
-                              copyToClipboard(
-                                project.credentials?.password as string
-                              )
-                            }
-                            className="text-gray-400 hover:text-white transition-colors p-1 flex-shrink-0"
-                            title="Copy password"
-                          >
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 )}

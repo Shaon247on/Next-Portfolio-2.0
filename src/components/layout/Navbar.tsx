@@ -26,9 +26,15 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (href: string) => {
+  // Real anchors, not buttons: crawlers follow href values and can surface the
+  // sections as sitelinks, while preventDefault keeps the smooth scroll.
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     const element = document.querySelector(href)
     if (element) {
+      event.preventDefault()
       element.scrollIntoView({ behavior: 'smooth' })
       setIsOpen(false)
     }
@@ -36,11 +42,12 @@ export default function Navbar() {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-50 px-2 lg:px-0 w-full ${
         scrolled ? 'glass backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="w-full max-w-7xl mx-auto sm:px-2 md:px-4 lg:px-8 xl:px-12 2xl:px-16">
+      <div className="w-full xl:max-w-7xl mx-auto sm:px-2 md:px-4 lg:px-8 xl:px-12 2xl:px-16">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <motion.div
@@ -49,29 +56,34 @@ export default function Navbar() {
             transition={{ delay: 0.2 }}
             className="text-xl sm:text-2xl font-bold gradient-text font-heading flex-shrink-0"
           >
-            <ShaonLogo size="sm" />
+            <a href="#home" aria-label="Md Aminul Islam Shaon — back to top">
+              <ShaonLogo size="sm" />
+            </a>
           </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
             {navItems.map((item, index) => (
-              <motion.button
+              <motion.a
                 key={item.name}
+                href={item.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                onClick={() => scrollToSection(item.href)}
+                onClick={(event) => handleNavClick(event, item.href)}
                 className="text-sm lg:text-base text-gray-300 hover:text-white transition-colors duration-200 font-medium relative group px-2 py-1"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-[calc(100%-16px)]"></span>
-              </motion.button>
+                {/* <span className="absolute -bottom-1 left-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 group-hover:w-[calc(100%-16px)]"></span> */}
+              </motion.a>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
             className="md:hidden text-white hover:text-blue-400 transition-colors duration-200 p-2 flex-shrink-0"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -91,16 +103,17 @@ export default function Navbar() {
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4">
               <div className="flex flex-col space-y-1">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <motion.a
                     key={item.name}
+                    href={item.href}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={(event) => handleNavClick(event, item.href)}
                     className="text-left py-3 px-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 font-medium"
                   >
                     {item.name}
-                  </motion.button>
+                  </motion.a>
                 ))}
               </div>
             </div>

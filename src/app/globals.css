@@ -41,6 +41,21 @@
 }
 
 @layer components {
+    /* These three were referenced across Navbar, Hero, About, Experience and
+       Project but never defined, so the cards rendered with no surface and the
+       section wrappers had no max-width or mobile padding. */
+    .container-custom {
+        @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .glass {
+        @apply bg-white/[0.04] backdrop-blur-md border border-white/10;
+    }
+
+    .gradient-text {
+        @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+    }
+
     .grid {
         @apply gap-[25px];
     }

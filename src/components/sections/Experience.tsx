@@ -100,7 +100,7 @@ export default function Experience() {
                     <div className="flex flex-col sm:flex-row gap-4 text-gray-400">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>October 2024 - December 2024</span>
+                        <span>October 2024 - September 2025</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
@@ -165,9 +165,9 @@ export default function Experience() {
                         </p>
 
                         <div className="space-y-2">
-                          <h4 className="text-sm font-semibold text-white">
+                          <p className="text-sm font-semibold text-white">
                             Tech Stack:
-                          </h4>
+                          </p>
                           <div className="flex flex-wrap gap-2">
                             {[
                               "Next.js",
@@ -231,13 +231,13 @@ export default function Experience() {
                         Junior Frontend Developer
                       </h3>
                       <h4 className="text-xl text-purple-400 font-semibold mb-2">
-                        Join Vanture AI
+                        AbSun Studio
                       </h4>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 text-gray-400">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>October 2024 - present</span>
+                        <span>November 2025 - present</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
@@ -267,9 +267,7 @@ export default function Experience() {
                           </h6>
                         </div>
                         <p className="text-gray-300 mb-3">
-                          Sports-focused web application connecting students
-                          with basketball and football coaches through dynamic
-                          booking and real-time communication.
+                          Sports-focused web application connecting court owners with actual real time customers  and help them to maintain their organization better.
                         </p>
                         <ul className="space-y-2 text-sm text-gray-400">
                           <li className="flex items-start gap-2">
@@ -315,7 +313,7 @@ export default function Experience() {
                         <div className="flex items-center gap-3 mb-3">
                           <Brain className="w-5 h-5 text-cyan-400" />
                           <h6 className="font-semibold text-white">
-                            Mathos (Math Problem-Solving Platform)
+                            Coyoote (Math Problem-Solving Platform)
                           </h6>
                         </div>
                         <p className="text-gray-300 mb-3">
@@ -434,9 +432,9 @@ export default function Experience() {
                       </div>
 
                       <div className="mt-6">
-                        <h4 className="text-sm font-semibold text-white mb-3">
+                        <p className="text-sm font-semibold text-white mb-3">
                           Tech Stack:
-                        </h4>
+                        </p>
                         <div className="flex flex-wrap gap-2">
                           {[
                             "Next.js",

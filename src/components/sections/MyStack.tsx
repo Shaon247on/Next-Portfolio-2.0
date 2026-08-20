@@ -21,8 +21,11 @@ import {
   SiReacthookform,
   SiAxios,
   SiSupabase,
+  SiJest,
+  SiTestinglibrary,
+  SiDocker,
 } from 'react-icons/si'
-import { FaUserShield, FaPalette, FaKey, FaLock, FaCheckCircle, FaProjectDiagram } from 'react-icons/fa'
+import { FaUserShield, FaPalette, FaKey, FaLock, FaCheckCircle, FaProjectDiagram, FaMagic } from 'react-icons/fa'
 
 const techStacks = {
   frontend: [
@@ -33,6 +36,8 @@ const techStacks = {
     { name: 'TailwindCSS', icon: SiTailwindcss, color: '#06B6D4' },
     { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
     { name: 'Redux Toolkit', icon: SiRedux, color: '#764ABC' },
+    { name: 'React Native', icon: SiReact, color: '#61DAFB' },
+    { name: 'Moti', icon: FaMagic, color: '#A78BFA' },
   ],
   backend: [
     { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
@@ -41,6 +46,11 @@ const techStacks = {
   database: [
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
     { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+    { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+  ],
+  testing: [
+    { name: 'Jest', icon: SiJest, color: '#C21325' },
+    { name: 'React Testing Library', icon: SiTestinglibrary, color: '#E33332' },
   ],
   tools: [
     { name: 'Material UI', icon: SiMaterialdesign, color: '#007FFF' },
@@ -109,13 +119,13 @@ export default function MyStack() {
         >
           <tech.icon />
         </motion.div>
-        <motion.h3 className="text-white font-semibold text-center transition-colors duration-300"
+        <motion.h4 className="text-white font-semibold text-center transition-colors duration-300"
           initial={{ color: '#FFFFFF' }}
           whileHover={{ color: '#60A5FA' }}
           transition={{ duration: 0.2 }}
         >
           {tech.name}
-        </motion.h3>
+        </motion.h4>
       </div>
       {/* Overlay removed per request (no background color on hover) */}
     </motion.div>
@@ -152,7 +162,8 @@ export default function MyStack() {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Technologies and tools I use to bring ideas to life
+              The full-stack toolkit behind my projects — Next.js, React,
+              TypeScript, Node.js, MongoDB and PostgreSQL
             </p>
           </motion.div>
 
@@ -170,9 +181,10 @@ export default function MyStack() {
               { name: 'JWT', icon: FaKey, color: '#F59E0B' },
               { name: 'jose', icon: FaLock, color: '#10B981' },
               { name: 'Zod Validation', icon: FaCheckCircle, color: '#06B6D4' },
-            ]} delay={7} />
-            <StackSection key={3} title="Database" techs={techStacks.database} delay={14} />
-            <StackSection key={4} title="Tools & Libraries" techs={techStacks.tools} delay={16} />
+            ]} delay={12} />
+            <StackSection key={3} title="Database" techs={techStacks.database} delay={19} />
+            <StackSection key={4} title="Testing" techs={techStacks.testing} delay={22} />
+            <StackSection key={5} title="Tools & Libraries" techs={techStacks.tools} delay={24} />
           </div>
         </motion.div>
       </div>

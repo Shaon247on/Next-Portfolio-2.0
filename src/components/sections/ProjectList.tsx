@@ -4,209 +4,15 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import FloatingImage from "./FloatingImage";
 import Project from "./Project";
+import { PROJECTS } from "@/data/projects";
 
-// TypeScript interface for project structure
-export interface ProjectType {
-  slug: string;
-  title: string;
-  thumbnail: string;
-  liveLink: string;
-  codeBase?: string;
-  techStack: string[];
-  credentials?: {
-    email?: string;
-    password?: string;
-  };
-  description?: string;
-  features?: string[];
-}
-
-// Updated data structure with new projects
-export const PROJECTS: ProjectType[] = [
-  {
-    slug: "sports-coaching-platform",
-    title: "BallMastery",
-    thumbnail: "../../../public/ballmastery.png",
-    liveLink: "https://ballmastery.com/",
-    codeBase: "https://github.com/Shaon247on/sportsverse",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Socket.IO",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "Shadcn/ui",
-    ],
-    credentials: {
-      email: "brighteto11@gmail.com",
-      password: "admin",
-    },
-    description:
-      "A comprehensive sports coaching platform connecting students with basketball and football coaches through dynamic booking, real-time video sessions, and location-based trainer discovery.",
-    features: [
-      "Dynamic booking calendar based on trainer weekly availability",
-      "Real-time video calling with mute/unmute and camera controls",
-      "Map-based trainer discovery with distance filtering",
-      "Real-time chat and notifications using Socket.IO",
-      "Admin-managed onboarding with trainer verification and payment gating",
-    ],
-  },
-  {
-    slug: "job-training-platform",
-    title: "RbWoodRuff",
-    thumbnail: "/api/placeholder/400/500",
-    liveLink: "https://dashboard.neworkx.com/",
-    codeBase: "https://github.com/Shaon247on/RbWoodRuff",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "Shadcn/ui",
-      "React Hook Form",
-    ],
-    credentials: {
-      email: "admin@gmail.com",
-      password: "Admin@1234",
-    },
-    description:
-      "Multi-role job and training management platform featuring four specialized dashboards for training providers, employers, agencies, and administrators with court-referred user tracking.",
-    features: [
-      "Role-based dashboards for employers, training providers, agencies, and admin",
-      "CSV upload functionality for case ID and court date management",
-      "Matching logic for tracking users with similar case IDs",
-      "AI resume builder integration with completion scoring",
-      "Compliance report generation for court submission",
-    ],
-  },
-  {
-    slug: "geography-quiz-platform",
-    title: "Geography",
-    thumbnail: "../../../public/geography.png",
-    liveLink: "https://geographygeyser.com/",
-    codeBase: "https://github.com/Shaon247on/Global-Math",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "MongoDB",
-      "Tailwind CSS",
-      "Shadcn/ui",
-    ],
-    credentials: {
-      email: "jahidislam1204.bd@gmail.com",
-      password: "123456789",
-    },
-    description:
-      "MCQ-based geography learning platform with comprehensive admin controls for question management, quiz scheduling, and student performance tracking.",
-    features: [
-      "Admin dashboard for subject creation and question management",
-      "CSV upload support for bulk question imports",
-      "Scheduled quiz windows with time-based participation",
-      "Real-time score tracking and performance analytics",
-      "User-friendly interface for seamless learning experience",
-    ],
-  },
-  {
-    slug: "business-platform",
-    title: "Oxdoug",
-    thumbnail: "../../../public/oxdoug.png",
-    liveLink: "https://www.notoverlandtech.com/",
-    codeBase: "https://github.com/Shaon247on/Oxdoug-Frontend",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Shadcn/ui",
-    ],
-    credentials: {
-      email: "jahidislam1204.bd@gmail.com",
-      password: "123456789",
-    },
-    description:
-      "Full-featured e-commerce platform with comprehensive shopping functionality including product browsing, cart management, secure checkout, order tracking, and user account management for seamless online shopping experience.",
-    features: [
-      "Complete product catalog with advanced search and filtering",
-      "Shopping cart with real-time updates and inventory management",
-      "Secure checkout process with multiple payment options",
-      "User authentication and profile management",
-      "Order history tracking and status updates",
-      "Responsive design for optimal mobile and desktop experience",
-    ],
-  },
-  {
-    slug: "math-platform",
-    title: "Mathos",
-    thumbnail: "../../../public/mathos.png",
-    liveLink: "https://mathos.cloud/",
-    codeBase: "https://github.com/Shaon247on/Mathos-Frontend",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Redux Toolkit",
-      "Tailwind CSS",
-      "Shadcn/ui",
-    ],
-    credentials: {
-      email: "admin@gmail.com",
-      password: "admin",
-    },
-    description:
-      "StackOverflow-inspired mathematics platform enabling students to collaborate on problem-solving with AI-powered assistance, classroom features, and community-driven voting system.",
-    features: [
-      "Upvote/downvote system with top solutions pinned automatically",
-      "Classroom features with Facebook-style group functionality",
-      "AI-powered assistance for solution generation and refinement",
-      "Real-time messaging between students and teachers",
-      "Comprehensive admin dashboard for user moderation and quiz management",
-    ],
-  },
-  {
-    slug: "Competition Platform",
-    title: "Victory Vault",
-    thumbnail: "/api/placeholder/400/500",
-    liveLink: "https://assignment-12-supremacy.web.app/",
-    codeBase: "https://github.com/Shaon247on/Victory-Vault-A12",
-    techStack: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "Socket.io",
-      "MongoDB",
-      "Tailwind CSS",
-    ],
-    credentials: {
-      email: "emarot@kaka.com",
-      password: "Rango247on",
-    },
-    description:
-      "Interactive competition platform with real-time features, comprehensive user management, and engaging community interactions for competitive gaming enthusiasts.",
-    features: [
-      "Real-time competition tracking with Socket.io integration",
-      "User authentication and profile management",
-      "Dynamic leaderboard and ranking system",
-      "Community features for user interaction",
-      "Responsive design for optimal mobile experience",
-    ],
-  },
-  {
-    slug: "Social Community Platform",
-    title: "Reflect Radar",
-    thumbnail: "/api/placeholder/400/500",
-    liveLink: "https://assignment-11-battlefield.web.app/",
-    codeBase: "https://github.com/Shaon247on/Reflect-Radar-A11",
-    techStack: ["React", "Prisma", "MongoDB", "Firebase", "Tailwind CSS"],
-    description:
-      "Social community platform fostering user engagement through interactive features, content sharing, and real-time communication capabilities.",
-    features: [
-      "User authentication with Firebase integration",
-      "Content sharing and community interaction features",
-      "Real-time updates and notifications",
-      "Responsive UI with Tailwind CSS",
-      "Database management with Prisma and MongoDB",
-    ],
-  },
-];
+// Project data and types now live in @/data/projects so that server components
+// (the JSON-LD graph) can read them without crossing the client boundary.
+export type {
+  ProjectType,
+  ProjectLink,
+  ProjectCredential,
+} from "@/data/projects";
 
 // Main Projects Section Component
 export default function ProjectList() {
@@ -309,6 +115,12 @@ export default function ProjectList() {
             </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          <p className="mt-6 text-center text-gray-400 text-base md:text-lg max-w-3xl mx-auto">
+            Production Next.js and React applications — B2B SaaS dashboards, POS
+            and inventory systems, FinTech and e-commerce platforms. Every one is
+            live, and most ship with demo credentials so you can log in and look
+            around.
+          </p>
         </motion.div>
 
         {/* Projects Container */}

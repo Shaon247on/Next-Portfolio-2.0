@@ -1,5 +1,3 @@
-'use client'
-
 import Navbar from "@/components/layout/Navbar"
 import About from "@/components/sections/About"
 import Experience from "@/components/sections/Experience"

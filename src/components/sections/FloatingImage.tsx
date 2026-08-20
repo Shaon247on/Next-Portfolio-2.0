@@ -6,7 +6,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useEffect } from "react";
-import { PROJECTS } from "./ProjectList";
+import { PROJECTS } from "@/data/projects";
 import Image from "next/image";
 
 const FloatingImage = ({
@@ -47,21 +47,6 @@ const FloatingImage = ({
 
   if (!selectedProject) return null;
 
-  // Get project image based on slug
-  const getProjectImage = (slug: string) => {
-    const imageMap: { [key: string]: string } = {
-      "sports-coaching-platform": "/ballmastery.png",
-      "job-training-platform": "/api/placeholder/600/400",
-      "geography-quiz-platform": "/geography.png",
-      "business-platform": "/oxdoug.png",
-      "math-platform": "/mathos.png",
-      "Competition Platform": "/VictoryVault.png",
-      "Social Community Platform": "/Reflect-Radar.png",
-    };
-
-    return imageMap[slug] || "/api/placeholder/600/400";
-  };
-
   return (
     <motion.div
       className="absolute top-0 left-0 z-10 pointer-events-none max-w-[500px] max-h-[700px] overflow-hidden rounded-lg shadow-2xl"
@@ -89,8 +74,8 @@ const FloatingImage = ({
                 {/* Project image */}
                 <div className="relative w-auto h-auto bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 border border-blue-500/20 rounded-lg overflow-hidden">
                   <Image
-                    src={getProjectImage(project.slug)}
-                    alt={`${project.title} Preview`}
+                    src={project.thumbnail}
+                    alt={`${project.title} — ${project.techStack[0]} project preview`}
                     width={500}
                     height={700}
                     className="w-auto h-auto min-w-[350px] max-w-[500px] max-h-[700px] object-contain"
